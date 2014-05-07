@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+		Remove this if you use the .htaccess -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<title>HTML</title>
+		<meta name="description" content="juegos HTML5" />
+		<link rel="shortcut icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		<link rel="stylesheet" href="css/styleteclas.css" />
+		<!-- se incluyen los estilos en el mismo archivo para facilitar
+		la descarga del ejemplo
+		-->
+		<style>
+			@font-face {
+				font-family: Yanone Kaffeesatz;
+				src: url('../fonts/YanoneKaffeesatz-Regular.eot');
+				src: local("Yanone Kaffeesatz"), url('../fonts/YanoneKaffeesatz-Regular.ttf');
+			}
+
+			@font-face {
+				font-family: News Cycle;
+				src: url('../fonts/NewsCycle-Regular.eot');
+				src: local("News Cycle"), url('../fonts/NewsCycle-Regular.ttf');
+			}
+
+			html {
+				width: 768px;
+				height: 532px;
+			}
+
+			* {
+				margin: 0;
+				padding: 0;
+			}
+
+			body {
+				font: normal .80em arial, sans-serif;
+				background: none repeat scroll 0% 0% rgb(0, 80,140 );
+				color: #AAA;
+			}
+
+			#main {
+				width: 760px;
+				height: 390px;
+				background: transparent;
+				border: 1px groove red;
+				padding: 1px 1px 1px 1px;
+				position: relative;
+			}
+			#field {
+				width: 550px;
+				height: 370px;
+				background: transparent;
+				border: 5px groove red;
+				padding: 5px 5px 5px 5px;
+				float: left;
+			}
+
+			#scores {
+				width: 170px;
+				height: 370px;
+				background: transparent;
+				border: 5px groove red;
+				padding: 5px 5px 5px 5px;
+				float: left;
+			}
+
+			header {
+				background: transparent;
+				height: 40px;
+				text-align: center;
+			}
+
+			nav {
+				width: 760px;
+				font: 100% 'Yanone Kaffeesatz', arial, sans-serif;
+				height: 40px;
+				padding: 1px 1px 1px 1px;
+				text-align: center;
+				background: #FFFF00; /* Show a solid color for older browsers */
+				background: -moz-linear-gradient(#FFFFFF, #FFFF00);
+				background: -o-linear-gradient(#FFFFFF, #FFFF0);
+				background: -webkit-linear-gradient(#FFFFFF, #FFFF0);
+				-webkit-box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 2px;
+				-moz-box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 2px;
+				box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 2px;
+				border: 1px solid #000;
+				border-radius: 7px 7px 7px 7px;
+				-moz-border-radius: 7px 7px 7px 7px;
+				-webkit-border: 7px 7px 7px 7px;
+				color: #AAA;
+			}
+
+			footer {
+				width: 760px;
+				font: 100% 'Yanone Kaffeesatz', arial, sans-serif;
+				height: 40px;
+				padding: 1px 1px 1px 1px;
+				text-align: center;
+				background: #39FF00; /* Show a solid color for older browsers */
+				background: -moz-linear-gradient(#ffffff, #39FF00);
+				background: -o-linear-gradient(#ffffff, #39FF00);
+				background: -webkit-linear-gradient(#ffffff, #39FF00);
+				-webkit-box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 2px;
+				-moz-box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 2px;
+				box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 2px;
+				border: 1px solid #000;
+				border-radius: 7px 7px 7px 7px;
+				-moz-border-radius: 7px 7px 7px 7px;
+				-webkit-border: 7px 7px 7px 7px;
+				color: #AAA;
+			}
+
+			footer p {
+				line-height: 1.7em;
+				padding: 0 0 10px 0;
+			}
+
+		</style>
+		<script type="text/javascript">
+			/**
+			 * @author Juan Carlos Miranda 09/2013
+			 * El script recibe los eventos y muestra en pantalla mensajes sobre
+			 * el evento registrado.
+			 * Se incluye el fuente en el mismo archivo para facilitar la descarga.
+			 *  */
+			//cargador de eventos
+			window.onload = function() {
+				/*Asigna los eventos*/
+				document.onkeyup = muestraInformacion;
+				document.onkeypress = muestraInformacion;
+				document.onkeydown = muestraInformacion;
+				document.onmousedown = muestraInformacion;
+				document.onmouseup = muestraInformacion;
+				document.onmousemove = muestraInformacion;
+				document.ontouchstart = muestraInformacion;
+				document.ontouchmove = muestraInformacion;
+				document.ontouchend = muestraInformacion;
+				console.log("Mensaje desde consola onload!");
+				takeScreenSize();
+			}
+			//muestra informacion seleccionando los tipos de eventos
+			function muestraInformacion(elEvento) {
+				var evento = window.event || elEvento;
+				var mensaje = "Tipo de evento: " + evento.type + "<br>" + "Propiedad keyCode: " + evento.keyCode + "<br>" + "Propiedad charCode: " + evento.charCode + "<br>" + "Carácter pulsado: " + String.fromCharCode(evento.charCode);
+				info1.innerHTML = mensaje;
+				evento.preventDefault();
+
+				switch (evento.type) {
+					case "mouseup":
+						break;
+					case "mousedown":
+						contadorClick.innerHTML++;
+						tituloCabecera.innerHTML = "CLICKANDO MOUSE";
+						break;
+					case "mousemove":
+						xMouse.innerHTML = evento.clientX;
+						yMouse.innerHTML = evento.clientY;
+						tituloCabecera.innerHTML = "MOVIENDO MOUSE";
+						break;
+					case "touchstart":
+						xMouse.innerHTML = evento.clientX;
+						yMouse.innerHTML = evento.clientY;
+						tituloCabecera.innerHTML = "APRETANDO TOUCH";
+						break;
+					case "touchend":
+						xMouse.innerHTML = evento.clientX;
+						yMouse.innerHTML = evento.clientY;
+						contadorTouch.innerHTML++;
+						tituloCabecera.innerHTML = "SOLTANDO TOUCH";
+						break;
+					case "touchmove":
+						xMouse.innerHTML = evento.clientX;
+						yMouse.innerHTML = evento.clientY;
+						tituloCabecera.innerHTML = "MOVIENDO TOUCH";
+						break;
+					default:
+						break;
+				}
+				//cloca mensajes segun el cursos presionado
+				switch (evento.keyCode) {
+					case 37:
+						cabecera.innerHTML = "<-- IZQUIERA";
+						pieFooter.innerHTML = "<-- IZQUIERDA";
+						tituloCabecera.innerHTML = "PRESIONA TECLA";
+						contadorIzq.innerHTML++;
+						break;
+					case 38:
+						cabecera.innerHTML = "^ ARRIBA";
+						pieFooter.innerHTML = "^ ARRIBA";
+						tituloCabecera.innerHTML = "PRESIONA TECLA";
+						contadorArri.innerHTML++;
+						break;
+					case 39:
+						cabecera.innerHTML = "DERECHA -->";
+						pieFooter.innerHTML = "DERECHA -->";
+						tituloCabecera.innerHTML = "PRESIONA TECLA";
+						contadorDer.innerHTML++;
+						break;
+					case 40:
+						cabecera.innerHTML = "v ABAJO";
+						pieFooter.innerHTML = "v ABAJO";
+						tituloCabecera.innerHTML = "PRESIONA TECLA";
+						contadorAba.innerHTML++;
+						break;
+					default:
+						break;
+				}
+
+			}
+
+			function takeScreenSize() {
+				var w = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+				var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+				xSize.innerHTML = w;
+				ySize.innerHTML = h;
+
+			}
+
+		</script>
+	</head>
+
+	<body>
+		<div>
+			<header id="cabeceraHeader">
+				<h1 id="tituloCabecera">Esperando evento</h1>
+			</header>
+			<nav id="menu">
+				<p id="cabecera">
+					Aqui se muestran las teclas presionadas
+				</p>
+				<p>
+					<a href="http://www.otroblogdetecnologias.blogspot.com/"> http://www.otroblogdetecnologias.blogspot.com </a>
+				</p>							
+			</nav>			
+			<div id="main">
+				<div id="field">
+					<!-- cuadro donde se muestran informaciones de los eventos-->
+					<div id="info1">
+						<p id="mensaje1" >
+							parrafo Mensaje 1
+						</p>
+					</div>
+				</div>
+				<div id="scores">
+					<!-- cuadro donde se muestran informaciones de contadores-->
+					<p id="contadorIzq" >
+						0
+					</p><label>IZQUIERDA</label>
+					<label>DERECHA</label>
+					<p id="contadorDer" >
+						0
+					</p>
+					<label>ABAJO</label>
+					<p id="contadorAba" >
+						0
+					</p>
+					<label>ARRIBA</label>
+					<p id="contadorArri" >
+						0
+					</p>
+					<label>CONTADOR CLICK MOUSE</label>
+					<p id="contadorClick" >
+						0
+					</p>
+					<label>CONTADOR TOUCHE</label>
+					<p id="contadorTouch" >
+						0
+					</p>
+					<label>PUNTERO X MOUSE</label>
+					<p id="xMouse" >
+						0
+					</p>
+					<label>PUNTERO Y MOUSE</label>
+					<p id="yMouse" >
+						0
+					</p>
+					<label>Res Tamano X</label>
+					<p id="xSize" >
+						0
+					</p>
+					<label>Res Tamano Y</label>
+					<p id="ySize" >
+						0
+					</p>
+				</div>
+			</div>
+
+			<footer>
+				<p id="pieFooter">
+					Aqui se muestran las teclas presionadas
+				</p>
+			</footer>
+		</div>
+	</body>
+</html>

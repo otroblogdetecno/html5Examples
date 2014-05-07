@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<!-- 
+
+Estos materiales son utiles para agregar conocimiento sobre el tema 
+
+https://developers.facebook.com/docs/reference/javascript/FB.getLoginStatus
+https://developers.facebook.com/docs/reference/javascript/FB.login
+https://developers.facebook.com/blog/post/2012/05/08/how-to--improve-the-experience-for-returning-users/
+https://developers.facebook.com/docs/graph-api/using-graph-api/#fieldexpansion
+	
+	-->
+
+
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+		Remove this if you use the .htaccess -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>Ejemplo de uso APIS Facebook</title>
+		<meta name="description" content="">
+		<meta name="http://otroblogdetecnologias.blogspot.com" content="usuario">
+		<meta name="viewport" content="width=device-width; initial-scale=1.0">
+		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+		<link rel="shortcut icon" href="/favicon.ico">
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+	</head>
+	<body>
+		<header>
+			<h1>Ejemplo de uso APIS Facebook</h1>
+			<p>
+				Se codificaron distintos casos de uso de las APIS de Facebook
+			</p>
+		</header>
+
+		<!-- Cargar el SDK de Facebook -->
+		<div id="fb-root"></div>
+		<script src="//connect.facebook.net/en_US/all.js"></script>
+		<script type="text/javascript">
+			// Inicializar el Facebook JavaScript SDK
+			//el appId debe ir entre comillas
+			FB.init({
+				appId : '1442126576030114',
+				xfbml : true,
+				status : true,
+				cookie : true,
+			});
+
+			// Login con el usuario FAcebook y consulta sobre permiso de cupleanos, email, localizacion
+			function authUser() {
+				FB.login(checkLoginStatus, {
+					scope : 'user_birthday,email,user_location'
+				});
+			}
+
+			// verifica el resutado del estado del usuario
+			function checkLoginStatus(response) {
+				if (response && response.status == 'connected') {
+					alert('USUARIO CONECTADO');
+					console.log('userID: ' + response.authResponse.userID);
+					console.log('accessToken: ' + response.authResponse.accessToken);
+					console.log('expiresIn: ' + response.authResponse.expiresIn);
+
+					//-------------------------------------------------
+					//luego de haber sido autenticado y haber permitido los permisos
+					//la APP puede solicitar los datos y haer algo
+					//llamada a la API de Facebook para conocer datos
+					FB.api("/me", function(response) {
+						if (response && !response.error) {
+							console.log('email: ' + response.email);
+							console.log('id: ' + response.id);
+							console.log('birthday: ' + response.birthday);
+							console.log('mail: ' + response.email);
+							console.log('fisrt_name: ' + response.first_name);
+							console.log('gender:' + response.gender);
+							console.log('last_name' + response.last_name);
+							console.log('link:' + response.link);
+							console.log('locale:' + response.locale);
+							console.log('name:' + response.name);
+							console.log('timezone' + response.timezone);
+							console.log('username' + response.username);
+						}
+					});
+					FB.api("/me?fields=picture", function(response) {
+						if (response && !response.error) {
+							console.log('photo:' + response.picture.data.url);
+						}
+					});
+					//-------------------------------------------------
+					//puede cargar en objeto para procesar
+					//puede guardar en base de datos o lo que sea
+					//-------------------------------------------------
+
+				} else if (response && response.status == 'not_authorized') {
+					alert('CONECTADO PERO NO AUTORIZADO');
+				} else {
+					alert('NO CONECTADO');
+				}
+			}
+
+			function probar() {
+				FB.getLoginStatus(checkLoginStatus);
+			}
+
+		</script>
+
+		<div id="main">
+			<input id="loginButton1" type="button" value="Probar_Si_estoy_conectado_a_Facebook" onclick="probar();" />
+			<input id="loginButton" type="button" value="Conectarme_a_Facebook" onclick="authUser();" />
+			<div class="fb-like-box" data-href="https://www.facebook.com/tatuvsbugs" data-colorscheme="light" data-show-faces="true" data-header="true" data-stream="false" data-show-border="true"></div>
+			<div class="fb-like" data-href="https://www.facebook.com/tatuvsbugs" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
+			<div class="fb-send" data-href="https://www.facebook.com/tatuvsbugs" data-colorscheme="light"></div>
+			<div class="fb-send" data-href="https://www.facebook.com/tatuvsbugs" data-colorscheme="light"></div>
+			<div class="fb-share-button" data-href="https://www.facebook.com/tatuvsbugs/" data-type="button_count"></div>
+
+		</div>
+		<footer>
+			<p>
+				<a href="http://otroblogdetecnologias.blogspot.com">http://otroblogdetecnologias.blogspot.com</a>
+			</p>
+		</footer>
+	</body>
+</html>
+

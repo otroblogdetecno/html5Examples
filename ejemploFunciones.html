@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Ejemplo</title>
+	</head>
+	<body>
+		<!-- Cargar el SDK de Facebook -->
+		<div id="fb-root"></div>
+		<script src="//connect.facebook.net/en_US/all.js"></script>
+		<script type="text/javascript">
+			// Inicializar el Facebook JavaScript SDK
+			//el appId debe ir entre comillas
+			FB.init({
+				appId : '1442126576030114',
+				xfbml : true,
+				status : true,
+				cookie : true,
+			});
+
+			// Login con el usuario FAcebook y consulta sobre permiso de cupleanos, email, localizacion
+			function authUser() {
+				FB.login(checkLoginStatus, {
+					scope : 'user_birthday,email,user_location'
+				});
+			}
+
+			// verifica el resutado del estado del usuario
+			function checkLoginStatus(response) {
+				if (response && response.status == 'connected') {
+					alert('USUARIO CONECTADO');
+					console.log('userID: ' + response.authResponse.userID);
+					console.log('accessToken: ' + response.authResponse.accessToken);
+					console.log('expiresIn: ' + response.authResponse.expiresIn);
+
+					//-------------------------------------------------
+					//luego de haber sido autenticado y haber permitido los permisos
+					//la APP puede solicitar los datos y haer algo
+					//llamada a la API de Facebook para conocer datos
+					FB.api("/me", function(response) {
+						if (response && !response.error) {
+							console.log('email: ' + response.email);
+							console.log('id: ' + response.id);
+							console.log('birthday: ' + response.birthday);
+							console.log('mail: ' + response.email);
+							console.log('fisrt_name: ' + response.first_name);
+							console.log('gender:' + response.gender);
+							console.log('last_name' + response.last_name);
+							console.log('link:' + response.link);
+							console.log('locale:' + response.locale);
+							console.log('name:' + response.name);
+							console.log('timezone' + response.timezone);
+							console.log('username' + response.username);
+						}
+					});
+					FB.api("/me?fields=picture", function(response) {
+						if (response && !response.error) {
+							console.log('photo:'+response.picture.data.url);
+						}
+					});
+					//-------------------------------------------------
+					//puede cargar en objeto para procesar
+					//puede guardar en base de datos o lo que sea
+					//-------------------------------------------------
+
+				} else if (response && response.status == 'not_authorized') {
+					alert('CONECTADO PERO NO AUTORIZADO');
+				} else {
+					alert('NO CONECTADO');
+				}
+			}
+
+			function probar() {
+				FB.getLoginStatus(checkLoginStatus);
+			}
+
+
+		</script>
+
+		<input id="loginButton1" type="button" value="Probar_Si_estoy_conectado_a_Facebook" onclick="probar();" />
+		<input id="loginButton" type="button" value="Conectarme_a_Facebook" onclick="authUser();" />
+		<div class="fb-like-box" data-href="https://www.facebook.com/tatuvsbugs" data-colorscheme="light" data-show-faces="true" data-header="true" data-stream="false" data-show-border="true"></div>
+		<div class="fb-like" data-href="https://www.facebook.com/tatuvsbugs" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
+		<div class="fb-send" data-href="https://www.facebook.com/tatuvsbugs" data-colorscheme="light"></div>							<div class="fb-send" data-href="https://www.facebook.com/tatuvsbugs" data-colorscheme="light"></div>
+		<div class="fb-share-button" data-href="https://www.facebook.com/tatuvsbugs/" data-type="button_count"></div>
+
+	</body>
+</html>

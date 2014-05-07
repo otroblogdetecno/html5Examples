@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+		Remove this if you use the .htaccess -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>Pasa valores de una lista a otra utilizando botones</title>
+		<meta name="description" content="">
+		<meta name="http://otroblogdetecnologias.blogspot.com" content="usuario">
+		<meta name="viewport" content="width=device-width; initial-scale=1.0">
+		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+		<link rel="shortcut icon" href="/favicon.ico">
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+	</head>
+	<body>
+		<header>
+			<h1>Pasa valores de una lista a otra utilizando botones</h1>
+		</header>
+		<div id="container" style="width:600px">
+			<div id="header" style="background-color:#FFA500;">
+				<h1 title="titulito" style="margin-bottom:0;">Titulo</h1>
+				<p>Pasa valores de una lista a otra utilizando botones</p>
+			</div>
+
+			<div id="center" style="background-color:#EEEEEE;height:200px;width:200px;float:left;">
+				<b>Izquierda</b>
+				<ul id="listaIzquierda">
+					<li>Primer elemento</li>
+					<li>Segundo elemento</li>					
+					<li>Tercer elemento</li>					
+				</ul>
+			</div>
+
+			<div id="left" style="background-color:#FFD700;height:200px;width:200px;float:left;">
+				<b>botones</b>
+				<br>
+				<div id="boton1"> <input type="button" title="botoncito1" value="-->" onclick="copiarLista('derecha'); return false;"/>  </div>
+				<div id="boton2"> <input type="button" title="botoncito2" value="<--" onclick="copiarLista('izquierda'); return false;"/> </div>
+			</div>
+			<div id="right" style="background-color:#EEEEEE;height:200px;width:200px;float:left;">
+				<b>derecha</b>
+				<ul id="listaDerecha">
+					<li>VACIA</li>
+				</ul>				
+			</div>
+			<div id="footer" style="background-color:#FFA500;clear:both;text-align:center;">
+				<h1 id="mensajeFooter">Footer</h1>
+			</div>
+
+		</div>
+
+		<footer>
+			<p>
+				<a href="http://otroblogdetecnologias.blogspot.com">http://otroblogdetecnologias.blogspot.com</a>
+			</p>
+		</footer>
+	</body>
+	<script type="text/javascript">		
+		//escribe un mensaje en el footer
+		function escribirMensaje(mensajeE){
+			var nuevoTitulo=document.getElementById("mensajeFooter");
+			var tituloPagina=document.getElementsByTagName("title");
+			tituloPagina[0].innerHTML=mensajeE;
+			nuevoTitulo.innerHTML=mensajeE;
+		}
+		
+		function copiarLista(direccion){
+			var listaCopiar;
+			var itemListaCopiar; //
+			var listaPegar;
+			var itemListaPegar;
+			var textoListaPegar;
+			
+			if(direccion=="izquierda"){
+					listaCopiar=document.getElementById("listaDerecha");
+					itemListaCopiar=document.getElementById("listaDerecha").getElementsByTagName("li");
+					listaPegar=document.getElementById("listaIzquierda");
+			}else{
+				if(direccion=="derecha"){
+					listaCopiar=document.getElementById("listaIzquierda");
+					itemListaCopiar=document.getElementById("listaIzquierda").getElementsByTagName("li");
+					listaPegar=document.getElementById("listaDerecha");										
+				}
+			}
+			escribirMensaje(direccion);
+			//antes de sacar el elemento cero del array, se fija si la lista
+			//no esta vacia
+			if(itemListaCopiar[0]!=undefined){
+				//anadir, crear elemento li, preparar nodo texto, cargar el texto
+				itemListaPegar=document.createElement("li");
+				textoListaPegar=document.createTextNode(itemListaCopiar[0].innerHTML);
+				itemListaPegar.appendChild(textoListaPegar);
+				
+				//agrega a la lista
+				listaPegar.appendChild(itemListaPegar);
+				//borra de la lista a copiar		
+				listaCopiar.removeChild(itemListaCopiar[0]);
+			}
+		}
+	</script>
+
+</html>

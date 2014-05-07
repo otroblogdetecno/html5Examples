@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+		Remove this if you use the .htaccess -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<title>HTML</title>
+		<meta name="description" content="" />
+		<meta name="author" content="usuario" />
+		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+			}
+
+			#cuadros_bar {
+				border: 2px solid #CCC;
+				padding: 1em;
+				margin: 1em 0 1em 4em;
+				width: 500px;
+				height: 300px;
+				position: relative;
+			}
+			#caja1 {
+				border: 10px solid green;
+				padding: 5px 5px 5px 5px;
+				width: 200px;
+				height: 200px;
+				position: absolute;
+				top: 50px;
+				left: 0px;
+				background: #39ff00; /* Show a solid color for older browsers */
+				background: -moz-linear-gradient(#ffffff, #39ff00);
+				background: -o-linear-gradient(#ffffff, #39ff00);
+				background: -webkit-linear-gradient(#ffffff, #39ff00);
+				/*shadows */
+				-webkit-box-shadow: rgba(0, 0, 0, 0.6) 0px 10px 5px;
+				-moz-box-shadow: rgba(0, 0, 0, 0.6) 0px 10px 5px;
+				box-shadow: rgba(0, 0, 0, 0.6) 0px 10px 5px;
+			}
+
+			#caja2 {
+				border: 10px solid red;
+				border-radius: 7px 7px 7px 90px;
+				-moz-border-radius: 7px 7px 7px 90px;
+				-webkit-border: 7px 7px 7px 90px;
+				width: 200px;
+				height: 200px;
+				position: absolute;
+				top: 50px;
+				left: 250px;
+			}
+
+			#caja3 {
+				border: 1px solid #0000FF;
+				border-radius: 7px 7px 7px 90px;
+				-moz-border-radius: 7px 7px 7px 90px;
+				-webkit-border: 7px 7px 7px 90px;
+				width: 200px;
+				height: 200px;
+				position: fixed;
+				right: 0px;
+				top: 0px;
+				width: 200px;
+				height: 200px;
+				-webkit-box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 2px;
+				-moz-box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 2px;
+				box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 2px;
+				background: #39FF00;
+				background: -moz-linear-gradient(#ffffff, #39FF00);
+				background: -o-linear-gradient(#ffffff, #39FF00);
+				background: -webkit-linear-gradient(#ffffff, #39FF00);
+			}
+
+			/*===========================================================*/
+
+			#cuadros_bar2 {
+				border: 2px solid #CCC;
+				padding: 1em;
+				margin: 1em 0 1em 4em;
+				width: 500px;
+				height: 300px;
+				position: relative;
+			}
+			/*cajas decruz roja
+			 para noticias */
+			#post-inner {
+				width: 200px;
+				height: 200px;
+				border: 1px solid rgb(193, 191, 191);
+				border-radius: 10px 10px 10px 10px;
+				box-shadow: 0px -1px 0px rgba(255, 255, 255, 0.4) inset, 0px 1px 1px rgba(0, 0, 0, 0.1);
+				background: -moz-linear-gradient(center top , rgb(255, 255, 255) 0%, rgb(237, 237, 237) 100%) repeat scroll 0% 0% transparent;
+				padding: 0px 15px 10px;
+				position: relative
+			}
+
+			#post-icon {
+				background: url("../images/icon-post.png") no-repeat scroll center center rgb(163, 211, 156);
+				width: 38px;
+				height: 38px;
+				display: block;
+				position: absolute;
+				top: -9px;
+				right: -3px;
+				border-radius: 20em 20em 20em 20em;
+				box-shadow: 0px -1px 0px rgba(0, 0, 0, 0.1) inset;
+				background-color: rgb(178, 18, 38);
+			}
+
+			#post-date {
+				font-size: 10px;
+				line-height: 100%;
+				color: rgb(255, 255, 255);
+				text-transform: uppercase;
+				background: none repeat scroll 0% 0% rgb(163, 211, 156);
+				padding: 5px 10px;
+				display: inline-block;
+				position: relative;
+				top: -1px;
+				box-shadow: 0px 2px 0px rgba(255, 255, 255, 0.2) inset, 0px 1px 0px rgba(0, 0, 0, 0.2) inset, 0px -1px 0px rgba(0, 0, 0, 0.08) inset;
+				border-bottom-right-radius: 3px;
+				border-bottom-left-radius: 3px;
+				background-color: rgb(178, 18, 38);
+			}
+			/* fin de cajas decruz roja
+			 para noticias*/
+
+			button {
+				font-family: Arial, Helvetica, sans-serif;
+				font-size: 14px;
+				color: #fff;
+				padding: 10px 20px;
+				border: 2px solid #000;
+				cursor: pointer;
+				-webkit-border-radius: 10px;
+				-moz-border-radius: 10px;
+				border-radius: 10px;
+				background: -webkit-linear-gradient(top, #a3a3a3, #000);
+				background: -moz-linear-gradient(top, #a3a3a3, #000);
+				background: linear-gradient(top, #a3a3a3, #000);
+				-webkit-box-shadow: 5px 5px 3px rgba(0,0,0,0.5);
+				-moz-box-shadow: 5px 5px 3px rgba(0,0,0,0.5);
+				box-shadow: 5px 5px 3px rgba(0,0,0,0.5);
+				-webkit-user-select: none;
+				-moz-user-select: none;
+				user-select: none;
+			}
+
+			button:hover {
+				background: -webkit-linear-gradient(top, #acc7a3, #506651);
+				background: -moz-linear-gradient(top, #acc7a3, #506651);
+				background: linear-gradient(top, #acc7a3, #506651);
+			}
+			button:active {
+				background: -webkit-linear-gradient(top, #858565, #c5c9a9);
+				background: -moz-linear-gradient(top, #858565, #c5c9a9);
+				background: linear-gradient(top, #858565, #c5c9a9);
+			}
+
+			.lado1 {
+				width: 141px;
+				height: 40px;
+			}
+		</style>
+		<script type="text/javascript">
+		/*Oculta cuadro*/
+			function ocultar(id) {
+				var elemento = document.getElementById(id);
+				elemento.style.display = "none";
+			}
+
+			function mostrar(id) {
+				var elemento = document.getElementById(id);
+				elemento.style.display = "inherit";
+			}
+		</script>
+
+	</head>
+
+	<body>
+		<div>
+			<header>
+				<h1>Distintos modelos de cajas utilizando HTML5/CSS3</h1>
+			</header>
+			<nav id="nav_content">
+				<p>
+					<a href="http://www.otroblogdetecnologias.blogspot.com/"> http://www.otroblogdetecnologias.blogspot.com </a>
+				</p>
+			</nav>
+			<div id="site_main">
+				<div id="cuadros_bar">
+					<p>
+						cuadros_bar
+					</p>
+					<div id="caja1">
+						<p>
+							Caja 1 con bordes,padding y relleno gradiente
+						</p>
+					</div>
+					<div id="caja2">
+						<p>
+							caja 2 right bordes, y bordes redondos
+						</p>
+						<p><img src="images/yellowcatchico.png" />
+						</p>
+					</div>
+					<div id="caja3">
+						<p>
+							caja 3 estatica y bordes redondeados
+						</p>
+					</div>
+				</div>
+
+				<div id="cuadros_bar2">
+					<p>
+						cuadros_bar2 flotantes
+					</p>
+					<div id="post-inner">
+						<span id="post-icon"></span>
+						<time class="post-date" pubdate="" datetime="2013-09-20">
+							fecha
+						</time>
+						<h1 id"post-title"> NOTICIA </h1>
+						<div id="post-content">
+							Contenido noticia
+						</div>
+						<p id="post-meta">
+							meta
+						</p>
+					</div>
+
+					<div id="paginacion">
+						<button id="aceptar" onclick="ocultar('post-inner'); return false;">
+							Ocultar
+						</button>
+						<button id="cancelar" onclick="mostrar('post-inner'); return false;">
+							Mostrar
+						</button>
+					</div>
+				</div>
+
+			</div>
+
+			<footer id="footer_content">
+				<p>
+					&copy; Modelos cajas footer
+				</p>
+			</footer>
+		</div>
+	</body>
+</html>

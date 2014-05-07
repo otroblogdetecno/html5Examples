@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+		Remove this if you use the .htaccess -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+		<title>HTML</title>
+		<meta name="description" content="" />
+		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
+		<style>
+			#stage {
+				position: relative;
+			}
+
+			.cell {
+				position: absolute;
+				width: 30px;
+				height: 30px;
+				border: 1px solid black;
+				background-color: white;
+			}
+
+		</style>
+	</head>
+	<nav id="nav_content">
+		<p>
+			<a href="http://www.otroblogdetecnologias.blogspot.com/"> http://www.otroblogdetecnologias.blogspot.com </a>
+		</p>
+	</nav>
+	<body>
+		<div>
+			<header>
+				<h1>Dibujando matrices en pantalla</h1>
+				<p>
+					Dibuja una matriz segun su contenido, cambia a color negro la celda si el contenido es 1
+				</p>
+			</header>
+			<div id="stage">
+				<p></p>
+			</div>
+		</div>
+		<script>
+/*Ejemplo para dibujar matrices de un escenario de juegos
+* Se basa en pequenas celdas que son reflejadas en la pantalla
+* Ejemplo tomado y adaptado de Foundation Game Design with HTML5 & Javascript - Rex van der Spuy
+*/
+var matrizMapa = [
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3],
+[2, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3],
+[3, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3],
+[4, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3],
+[5, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3],
+[6, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3],
+[7, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3],
+[8, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3],
+[9, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3],
+[0, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3],
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3],
+[2, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3],
+[3, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3],
+];
+
+//==============================================
+dibujar(matrizMapa);
+//==============================================
+function dibujar(matriz) {
+var fila = 0;
+var columna = 0;
+var celda;
+var SIZE = 30;
+var SPACE = 1;
+var FILAS = matriz[0].length;
+var COLUMNAS = matriz.length;
+var stage = document.querySelector("#stage");
+for ( fila = 0; fila < FILAS; fila++) {
+for ( columna = 0; columna < COLUMNAS; columna++) {
+celda = document.createElement("div");
+celda.setAttribute("class", "cell");
+stage.appendChild(celda);
+if (matriz[fila][columna] === 1) {
+celda.style.backgroundColor = "black";
+}
+celda.style.top = fila * (SIZE + SPACE) + "px";
+celda.style.left = columna * (SIZE + SPACE) + "px";
+}
+}
+}//fin dibujar
+		</script>
+	</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+		Remove this if you use the .htaccess -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<title>HTML</title>
+		<meta name="description" content="" />
+		<meta name="author" content="usuario" />
+		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
+		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+		<link rel="shortcut icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		<!--		<script type="text/javascript" src="js/manejoteclas.js"></script>-->
+		<script type="text/javascript">
+			/**
+			 * @author Juan Carlos Miranda juancarlosmiranda81@gmail.com
+			 */
+			//cargar eventos y asociar las funciones
+			window.onload = function() {
+				document.onkeyup = muestraInformacion;
+				document.onkeypress = muestraInformacion;
+				document.onkeydown = muestraInformacion;
+				document.onmousedown = muestraInformacion;
+				document.onmouseup = muestraInformacion;
+				console.log("Mensaje desde consola onload!");
+				for (var i = 1; i < 1000; i++) {
+					setTimeOut(5000)
+
+				}
+			}
+			//se encarga de mostrar la informacion
+			function muestraInformacion(elEvento) {
+				var evento = window.event || elEvento;
+				var mensaje = "Tipo de evento: " + evento.type + "<br>" + "Propiedad keyCode: " + evento.keyCode + "<br>" + "Propiedad charCode: " + evento.charCode + "<br>" + "Carácter pulsado: " + String.fromCharCode(evento.charCode);
+				info.innerHTML = mensaje;
+				console.log("muestraInformacion");
+				tituloCabecera.innerHTML = "TOCANDO TECLA";
+				//control de teclas segun codigo de teclas presionadas
+				switch (evento.keyCode) {
+					case 37:
+						//escribir en los objetos que mostraran mensajes
+						cabecera.innerHTML = "<-- IZQUIERA";
+						pieFooter.innerHTML = "<-- IZQUIERDA";
+						break;
+					case 38:
+						//escribir en los objetos que mostraran mensajes
+						cabecera.innerHTML = "^ ARRIBA";
+						pieFooter.innerHTML = "^ ARRIBA";
+						break;
+					case 39:
+						//escribir en los objetos que mostraran mensajes
+						cabecera.innerHTML = "DERECHA -->";
+						pieFooter.innerHTML = "DERECHA -->";
+						break;
+					case 40:
+						//escribir en los objetos que mostraran mensajes
+						cabecera.innerHTML = "v ABAJO";
+						pieFooter.innerHTML = "v ABAJO";
+						break;
+					default:
+						break;
+				}
+
+			}
+		</script>
+	</head>
+	<nav id="nav_content">
+		<p>
+			<a href="http://www.otroblogdetecnologias.blogspot.com/"> http://www.otroblogdetecnologias.blogspot.com </a>
+		</p>
+	</nav>
+	<body id="bodyId">
+		<div>
+			<header id="cabeceraHeader">
+				<h1 id="tituloCabecera">Jugando con teclas</h1>
+				<p id="cabecera">
+					Barra de mensajes, aqui se muestran las teclas presionadas
+				</p>
+			</header>
+			<div id="site_main">
+				<p>
+					Ejemplo de eventos con teclas
+				</p>
+				<p id="mensaje" >
+					Principal
+				</p>
+			</div>
+			<div id="info"></div>
+
+			<footer>
+				<p id="pieFooter">
+					Barra de mensajes, aqui se muestran las teclas presionadas
+				</p>
+			</footer>
+		</div>
+	</body>
+</html>
